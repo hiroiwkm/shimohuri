@@ -6,27 +6,41 @@
     <style>
       body{
         background-color:yellow;
+        text-align:center;
+      }
+      .container{
+        display:flex;
+      }
+      .list{
+        width:40vw;
+        margin:0 auto;
+      }
+      ul{
+        list-style:none;
       }
     </style>
   </head>
   <body>
 
     <h1>動画</h1>
+    <div>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/B5Kob4WlNQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     <input id="keyword" type="text" value="霜降り明星"/>
-      <button>検索</button>
-      <div>
-          <h2>おすすめ動画</h2>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/B5Kob4WlNQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <ul id="recomend"></ul>
-      </div>
-      <div>
+    <button>検索</button>
+
+    <div class="container">
+      <div class="list">
           <h2>新着動画</h2>
           <ul id="new"></ul>
       </div>
-      <div>
+      <div class="list">
           <h2>ランダム動画</h2>
           <ul id="random"></ul>
       </div>
+    </div>
+        
+     
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
