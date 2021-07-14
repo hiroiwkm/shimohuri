@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>サンプルデモ</title>
+    <style>
+      body{
+        background-color:yellow;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>動画</h1>
+    <input id="keyword" type="text" value="霜降り明星"/>
+      <button>検索</button>
+      <div>
+          <h2>おすすめ動画</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/B5Kob4WlNQI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <ul id="recomend"></ul>
+      </div>
+      <div>
+          <h2>新着動画</h2>
+          <ul id="new"></ul>
+      </div>
+      <div>
+          <h2>ランダム動画</h2>
+          <ul id="random"></ul>
+      </div>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+     const url = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBUuQLq9zA0OJNn9ublXfXkJePZyCh71n8&maxResults=20&type=video&part=snippet&q=';
+
+    $('button').on('click', () => {
+      $.ajax({
+        url:url + $('#keyword').val(),
+        dataType:"json",
+      }).done(data => {
+
+        console.log(data.items);
+        console.log(Math.floor(Math.random()*data.items.length));
+        $('#new').empty('');
+        $('#random').empty('');
+        
+       
+        for(let i=0;i<5;i++){
+          console.log(data.items[i].snippet.thumbnails.medium.url);
+          $('#new').append('<img src="'+ data.items[i].snippet.thumbnails.medium.url+'"></img>');
+          $('#new').append('<li><a href="https://www.youtube.com/watch?v=' +data.items[i].id.videoId+'">'+ data.items[i].snippet.description+'</a></li>');
+        }
+       
+       const makeRandom =()=>{
+         const rnd = Math.floor(Math.random()*data.items.length);
+         $('#random').append('<img src="'+ data.items[rnd].snippet.thumbnails.medium.url+'"></img>');
+         $('#random').append('<li><a href="https://www.youtube.com/watch?v=' +data.items[rnd].id.videoId+'">'+ data.items[rnd].snippet.description+'</a></li>');
+         }
+        
+        for(let a=0;a<5;a++){
+          makeRandom(a);
+        }
+        
+        })
+      })
+
+    
+    </script>
+  </body>
+</html>
