@@ -34,7 +34,7 @@
         <button id="next">>></button>
     </div>
     <input id="keyword" type="text" value="霜降り明星"/>
-    <button>検索</button>
+    <button id="search">検索</button>
 
     <div class="container">
       <div class="list">
@@ -75,14 +75,14 @@
 
      const url = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyBUuQLq9zA0OJNn9ublXfXkJePZyCh71n8&maxResults=20&type=video&part=snippet&q=';
 
-    $('button').on('click', () => {
+    $('#search').on('click', () => {
       $.ajax({
         url:url + $('#keyword').val(),
         dataType:"json",
       }).done(data => {
 
         console.log(data.items);
-        console.log(Math.floor(Math.random()*data.items.length));
+
         $('#new').empty('');
         $('#random').empty('');
         
